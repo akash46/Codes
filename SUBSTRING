@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+public class Main {
+	public static void main(String[] args){
+		Reader.init(System.in);
+		try{
+			String str1 = Reader.next();
+			int n = Reader.nextInt();
+			int m = Reader.nextInt();
+			
+			System.out.println(str1.substring(n,m));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+		
+}
+
+/** Class for buffered reading int and double values */
+class Reader {
+    static BufferedReader reader;
+    static StringTokenizer tokenizer;
+
+    /** call this method to initialize reader for InputStream */
+    static void init(InputStream input) {
+        reader = new BufferedReader(
+                     new InputStreamReader(input) );
+        tokenizer = new StringTokenizer("");
+    }
+
+    /** get next word */
+    static String next() throws IOException {
+        while ( ! tokenizer.hasMoreTokens() ) {
+            //TODO add check for eof if necessary
+            tokenizer = new StringTokenizer(
+                   reader.readLine() );
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt( next() );
+    }
+	
+    static double nextDouble() throws IOException {
+        return Double.parseDouble( next() );
+    }
+}
