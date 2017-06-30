@@ -1,0 +1,80 @@
+import java.io.*;
+import java.util.StringTokenizer;
+public class Chef {
+	public static void main(String[] args) throws IOException{
+		Reader.init(System.in);
+		try{
+			int rem, rev = 0;
+			int t = Reader.nextInt();
+			while(t-- >0){
+				int n = Reader.nextInt();
+						while(n!=0){
+							rem = n%10;
+				            rev = rev*10 + rem;
+				            n = n/10;
+					}
+			}
+			System.out.print(rev);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** Class for buffered reading int and double values */
+class Reader {
+    static BufferedReader reader;
+    static StringTokenizer tokenizer;
+
+    /** call this method to initialize reader for InputStream */
+    static void init(InputStream input) {
+        reader = new BufferedReader(
+                     new InputStreamReader(input) );
+        tokenizer = new StringTokenizer("");
+    }
+
+    /** get next word */
+    static String next() throws IOException {
+        while ( ! tokenizer.hasMoreTokens() ) {
+            tokenizer = new StringTokenizer(
+                   reader.readLine() );
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt( next() );
+    }
+	
+    static double nextDouble() throws IOException {
+        return Double.parseDouble( next() );
+    }
+}
