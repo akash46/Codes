@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+class LAB {
+	public static void main(String args[] ) throws IOException{
+		InputStreamReader it = new InputStreamReader(System.in);
+		BufferedReader in = new BufferedReader(it);
+		String loo1 = in.readLine();
+		int mloop = Integer.parseInt(loo1);
+		for(int j = 0 ; j< mloop ;j++){
+			long ans = 0;
+		String inp1 = in.readLine();
+		StringTokenizer st = new StringTokenizer(inp1);
+		int size = Integer.parseInt((String) st.nextElement());
+		int [] arr = new int[size];
+		int loop = Integer.parseInt((String) st.nextElement());
+		String inp2 = in.readLine();
+		StringTokenizer str = new StringTokenizer(inp2);
+		int y = 0;
+		while(str.hasMoreElements()){
+			arr[y] =Integer.parseInt((String) str.nextElement());
+			y++;
+		}
+		for(int k = 0 ;k<loop ; k++){
+			call(arr);
+			int hu = arr[0];
+			
+			arr[0] = (int) Math.floor(arr[0] / 2);
+			ans += hu - arr[0];
+		}
+		System.out.println(ans);
+	}
+}
+	public static void print(int [] arr){
+		for(int io :arr){
+			System.out.print(io + " ");
+		}
+	}
+	public static void call(int [] arr){
+		for(int i = arr.length -1/2 ; i >= 0 ;i -- ){
+			Heapify(arr , i);
+		}
+	}
+	public static void Heapify(int[] arr , int i){
+		int left = 2*i +1;
+		int right = 2*i +2;
+		int largest = i;
+		if(left < arr.length && arr[left] > arr[largest]){
+			largest = left;
+		}
+		if(right < arr.length && arr[right] > arr[largest]){
+			largest = right;
+		}
+		if(largest  != i){
+			int temp = arr[i];
+			arr[i] = arr[largest];
+			arr[largest] = temp;
+			Heapify(arr , largest);
+		}
+	}
+}
