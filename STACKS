@@ -1,0 +1,174 @@
+import java.io.*;
+//import java.util.Stack;
+import java.util.StringTokenizer;
+public class Main {
+	public static void main(String[] args) throws IOException{    
+		Reader.init(System.in);
+		int t = Reader.nextInt();
+		Stack b = new Stack();
+		int n = Reader.nextInt();
+		while(n-- >0){
+			String str = Reader.next();
+			if(str.equals("push")){
+				int k = Reader.nextInt();
+				b.push(k);
+				System.out.println(k);
+			}else if(str.equals("pop")){
+				b.pop();
+				//System.out.println(b.pop());
+			}else if(str.equals("getmin")){
+				b.getmin();
+				//System.out.println(b.getmin());
+			}else if(str.equals("top")){
+				b.top();
+				//System.out.println(b.top());
+			}
+			else{
+				b.isEmpty();
+			}
+			
+		}
+	}
+}
+
+
+class Node{
+	public int data;
+	public Node link;
+	public Node(){
+		link = null;
+		data = 0;
+	}
+	public Node(int d, Node n){
+		data = d;
+		link = n;
+	}
+	public void setData(int d){
+		data = d;
+	}
+	public Node getLink(){
+		return link; 
+	}
+	public int getData(){
+		return data;
+	}
+	public void setLink(Node n){
+		link = n;
+	}
+	
+}
+
+
+
+class Stack{
+	protected Node top;
+	static public int size=0;
+	
+	static public int min;
+	public Stack(){
+		top = null;
+		size = 0; 
+	}
+	public int getSize(){
+		return size;
+	}
+	public void push(int data){			// Insert a element in the Stack
+		Node nptr = new Node(data,null);
+		if(top == null)
+			{
+			top = nptr;
+			min=nptr.data;
+			size++;
+			}
+		else{
+			nptr.setLink(top);
+			if(nptr.data<min){
+				min=nptr.data;
+			}
+			top = nptr;
+			size++;
+		}
+		
+		//if(min>top.data) min=top.data;
+		//System.out.print(" "+min);
+	}
+	public void pop(){					// Deleting a element from the Stack
+		if(top == null){
+			System.out.println(-1);
+		}else{
+			Node tmp=top.link;
+			if(top.data==min){
+				min=10000;
+				for(int i=1;i<size;i++){
+					if(tmp.data<min) min=tmp.data;
+					tmp=tmp.link;
+					//System.out.println(min);
+				}
+			}
+			int d = top.getData();
+			top = top.getLink();
+			size--;
+			System.out.println(d);
+		}
+	}
+	public void top(){					// Display the top element 
+		if(top==null){
+			System.out.println(0);
+		}else{
+			int d = top.getData();
+			System.out.println(d);
+		}
+	}
+	public void isEmpty(){
+		if(top == null){
+			System.out.println(1);;
+		}else{
+			System.out.println(0);;
+		}
+	}
+	public void getmin(){
+		if(top == null){
+			System.out.println(-1);
+		}else{
+			System.out.println(min);
+		}
+	}
+	public void display(){
+		Node ptr = top;
+		while(ptr!=null){
+			System.out.println(ptr.getData());
+		}
+		System.out.println();
+	}
+}
+
+/** Class for buffered reading int and double values */
+class Reader {
+    static BufferedReader reader;
+    static StringTokenizer tokenizer;
+
+    /** call this method to initialize reader for InputStream */
+    static void init(InputStream input) {
+        reader = new BufferedReader(
+                     new InputStreamReader(input) );
+        tokenizer = new StringTokenizer("");
+    }
+
+    /** get next word */
+    static String next() throws IOException {
+        while ( ! tokenizer.hasMoreTokens() ) {
+            //TODO add check for eof if necessary
+            tokenizer = new StringTokenizer(
+                   reader.readLine() );
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt( next() );
+    }
+	
+    static double nextDouble() throws IOException {
+        return Double.parseDouble( next() );
+    }
+}
