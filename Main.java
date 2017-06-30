@@ -1,26 +1,50 @@
 import java.io.*;
 import java.util.StringTokenizer;
 public class Main {
-	public static void main(String[] args){
+	public static void main(String [] args) throws IOException{
 		Reader.init(System.in);
-		try{
-			int t = Reader.nextInt();
-			if(t==0){
-				System.out.println("NO");
-			}else if(t%2==0){
-				System.out.println("YES");
-			}else{
-				System.out.println("NO");
+		long t = Reader.nextlong();
+		while(t-- >0){
+			long x = Reader.nextlong();
+			long y = Reader.nextlong();
+			long z = Reader.nextlong();
+			long c = (z/2);
+			long d = z-c;
+			if(z==1){
+				long i = x*2;
+				long w = Math.max(i,y);
+				long e = Math.min(i,y);
+				long j = w/e;
+				System.out.println(j);
+			}else if(z%2 == 0){
+				long n = (long) (x*Math.pow(2,z/2));
+				long m = (long) (y*Math.pow(2,z/2));
+				long w = Math.max(n,m);
+				long e = Math.min(n,m);
+				long l = w/e;
+				System.out.println(l);
+			}else if(z%2 == 1){
+				long a = (long) (x*Math.pow(2,d));
+				long b = (long) (y*Math.pow(2,c));
+				long w = Math.max(a,b);
+				long e = Math.min(a,b);
+				long j = w/e;
+				System.out.println(j);
 			}
-		}catch(IOException e){
-			e.printStackTrace();
 		}
 	}
 }
 
 
 
-/** Class for buffered reading int and double values */
+
+
+
+
+
+
+
+/** Class for buffered reading long and double values */
 class Reader {
     static BufferedReader reader;
     static StringTokenizer tokenizer;
@@ -42,7 +66,7 @@ class Reader {
         return tokenizer.nextToken();
     }
 
-    static int nextInt() throws IOException {
+    static long nextlong() throws IOException {
         return Integer.parseInt( next() );
     }
 	
