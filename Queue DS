@@ -1,0 +1,118 @@
+import java.io.*;
+import java.util.StringTokenizer;
+public class Main {
+	public static void main(String[] args) throws IOException{
+	}
+}
+class Node{
+	public int data;
+	public Node link;
+	public Node(){
+		link = null;
+		data = 0;
+	}
+	public Node(int d, Node n){
+		data = d;
+		link = n;
+	}
+	public void setLink(Node n){
+		link = n;
+	}
+	public void setData(int d){
+		data = d;
+	}
+	public Node getLink(){
+		return link;
+	}
+	public int getData(){
+		return data;
+	}
+}
+class Queue{
+	protected Node front;
+	protected Node rear;
+	public int size;
+	public Queue(){
+		front = null;
+		rear = null;
+		size = 0;
+	}
+	public int getSize(){
+		return size;
+	}
+	public boolean isempty(){
+		return front == null;
+	}
+	public void enqueue(int value){ 			// insert a element to a queue
+		Node nptr = new Node(value,null);
+		if(rear == null){
+			front = nptr;
+		}else{
+			rear.setLink(nptr);
+			rear = nptr;
+		}
+		size++;
+	}
+	public int dequeue(){						// delete a element from a queue
+		if(isempty())
+			return -1;
+		int d = front.getData();
+		front = front.getLink();
+		if(front == null)
+			rear = null;
+		size--;
+		return d;
+	}
+	public int peek(){							// Displays the top element of the queue
+		if(isempty()){
+			return -1;
+		}else{
+			int d = front.getData();
+			return d;
+		}
+	}
+	public void display(){						// display the queue
+		if (size == 0){
+			System.out.println(-1);
+			return;
+		}else{
+			Node ptr = front;
+			while(ptr!=rear.getLink()){
+				System.out.print(ptr.getData() + " ");
+				ptr = ptr.getLink();
+			}
+			System.out.println();
+		}
+	}
+}
+
+/** Class for buffered reading int and double values */
+class Reader {
+    static BufferedReader reader;
+    static StringTokenizer tokenizer;
+
+    /** call this method to initialize reader for InputStream */
+    static void init(InputStream input) {
+        reader = new BufferedReader(
+                     new InputStreamReader(input) );
+        tokenizer = new StringTokenizer("");
+    }
+
+    /** get next word */
+    static String next() throws IOException {
+        while ( ! tokenizer.hasMoreTokens() ) {
+            //TODO add check for eof if necessary
+            tokenizer = new StringTokenizer(
+                   reader.readLine() );
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt( next() );
+    }
+	
+    static double nextDouble() throws IOException {
+        return Double.parseDouble( next() );
+    }
+}
