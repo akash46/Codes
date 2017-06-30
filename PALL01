@@ -1,0 +1,75 @@
+import java.io.*;
+import java.util.StringTokenizer;
+public class Main {
+	public static void main(String[] args){
+		Reader.init(System.in);
+		try{
+			int t = Reader.nextInt();
+			while(t-- >0){
+				int n = Reader.nextInt();
+				int a = n;
+				int reverse=0;
+				while(n!=0){
+					reverse = reverse*10 + n%10;
+					n=n/10;
+				}
+				if(a==reverse){
+					System.out.println("wins");
+				}else{
+					System.out.println("losses");
+				}
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** Class for buffered reading int and double values */
+class Reader {
+    static BufferedReader reader;
+    static StringTokenizer tokenizer;
+
+    /** call this method to initialize reader for InputStream */
+    static void init(InputStream input) {
+        reader = new BufferedReader(
+                     new InputStreamReader(input) );
+        tokenizer = new StringTokenizer("");
+    }
+
+    /** get next word */
+    static String next() throws IOException {
+        while ( ! tokenizer.hasMoreTokens() ) {
+            tokenizer = new StringTokenizer(
+                   reader.readLine() );
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt( next() );
+    }
+	
+    static double nextDouble() throws IOException {
+        return Double.parseDouble( next() );
+    }
+}
