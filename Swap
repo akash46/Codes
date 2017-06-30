@@ -1,0 +1,62 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+public class Main {
+	public static void main(String[] args) throws IOException{
+		Reader.init(System.in);
+		int n = Reader.nextInt();
+		int[] arr = new int[n];
+		for(int i=0; i<n; i++){
+			arr[i] = Reader.nextInt();
+		}
+		System.out.println(getElementSwaps(arr,n));
+	}
+	public static int getElementSwaps(int[] ar, int size) {
+		  if (size <= 1) {
+		    return 0;
+		  }
+		  int shifts = 0;
+		  for (int i = 1; i < size; i++) {
+		    int moveMe = ar[i];
+		    int j = i;
+		    while (j > 0 && moveMe < ar[j - 1]) {
+		      ar[j] = ar[j - 1];
+		      --j;
+		      ++shifts;
+		    }
+		    ar[j] = moveMe;
+		  }
+		  return shifts;
+		}
+}
+/** Class for buffered reading int and double values */
+class Reader {
+    static BufferedReader reader;
+    static StringTokenizer tokenizer;
+
+    /** call this method to initialize reader for InputStream */
+    static void init(InputStream input) {
+        reader = new BufferedReader(
+                     new InputStreamReader(input) );
+        tokenizer = new StringTokenizer("");
+    }
+
+    /** get next word */
+    static String next() throws IOException {
+        while ( ! tokenizer.hasMoreTokens() ) {
+            //TODO add check for eof if necessary
+            tokenizer = new StringTokenizer(
+                   reader.readLine() );
+        }
+        return tokenizer.nextToken();
+    }
+
+    static int nextInt() throws IOException {
+        return Integer.parseInt( next() );
+    }
+    static long nextLong() throws IOException {
+        return Long.parseLong( next() );
+    }
+}
