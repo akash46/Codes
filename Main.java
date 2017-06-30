@@ -1,50 +1,43 @@
-import java.io.*;
-import java.util.StringTokenizer;
-public class Main {
-	public static void main(String [] args) throws IOException{
-		Reader.init(System.in);
-		long t = Reader.nextlong();
-		while(t-- >0){
-			long x = Reader.nextlong();
-			long y = Reader.nextlong();
-			long z = Reader.nextlong();
-			long c = (z/2);
-			long d = z-c;
-			if(z==1){
-				long i = x*2;
-				long w = Math.max(i,y);
-				long e = Math.min(i,y);
-				long j = w/e;
-				System.out.println(j);
-			}else if(z%2 == 0){
-				long n = (long) (x*Math.pow(2,z/2));
-				long m = (long) (y*Math.pow(2,z/2));
-				long w = Math.max(n,m);
-				long e = Math.min(n,m);
-				long l = w/e;
-				System.out.println(l);
-			}else if(z%2 == 1){
-				long a = (long) (x*Math.pow(2,d));
-				long b = (long) (y*Math.pow(2,c));
-				long w = Math.max(a,b);
-				long e = Math.min(a,b);
-				long j = w/e;
-				System.out.println(j);
-			}
-		}
-	}
-}
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main{
+  public static boolean Palindrome(int a){
+    int temp=a;
+    int reverse=0;
+    while(a>0){
+      reverse=reverse*10+a%10;
+      a=a/10;
+    }
+    if(reverse==temp)
+      return true;
+    else
+      return false;
+  }
+  public static void main(String args[]){
+    Scanner scan=new Scanner(System.in);
+    int n,m,count,i;
+    int t=scan.nextInt();
+    boolean check;
+    while(t>0){
+      n=scan.nextInt();
+      m=scan.nextInt();
+      count=0;
+      for(i=n;i<=m; i++){
+        check=Palindrome(i);
+        if(check)
+          count=count+i;
+      }
+      System.out.println(count);
+      t--;
+    }
+  }
+} 
 
 
-
-
-
-
-
-
-
-
-/** Class for buffered reading long and double values */
+/** Class for buffered reading int and double values */
 class Reader {
     static BufferedReader reader;
     static StringTokenizer tokenizer;
@@ -59,14 +52,13 @@ class Reader {
     /** get next word */
     static String next() throws IOException {
         while ( ! tokenizer.hasMoreTokens() ) {
-            //TODO add check for eof if necessary
             tokenizer = new StringTokenizer(
                    reader.readLine() );
         }
         return tokenizer.nextToken();
     }
 
-    static long nextlong() throws IOException {
+    static int nextInt() throws IOException {
         return Integer.parseInt( next() );
     }
 	
